@@ -1,9 +1,22 @@
 package exceptions;
 
-public class RateException extends Exception {
+import rocketDomain.RateDomainModel;
 
-	//	TODO - RocketBLL RateException - RateDomainModel should be an attribute of RateException
-	//	* Add RateRomainModel as an attribute
-	//	* Create a constructor, passing in RateDomainModel
-	//	* Create a getter (no setter, set value only in Constructor)
-}
+public class RateException extends Exception {
+	public RateDomainModel rateDM = null;
+
+	public RateDomainModel getRateDM() {
+		return rateDM;
+	}
+
+	//public void setRateDM(RateDomainModel rateDM) {
+		//this.rateDM = rateDM;
+	
+	public RateException(RateDomainModel RDM){
+		rateDM = RDM;
+	}
+	}
+	
+
+
+//
