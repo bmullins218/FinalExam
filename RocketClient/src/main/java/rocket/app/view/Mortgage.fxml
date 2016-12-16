@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="344.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rocket.app.view.MortgageController">
+<AnchorPane prefHeight="344.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rocket.app.view.MortgageController\">
    <children>
       <TextField layoutX="306.0" layoutY="71.0" />
       <TextField layoutX="306.0" layoutY="14.0" />
