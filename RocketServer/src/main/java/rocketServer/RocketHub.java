@@ -2,6 +2,7 @@ package rocketServer;
 
 import java.io.IOException;
 
+import exceptions.RateException;
 import netgame.common.Hub;
 import rocketBase.RateBLL;
 import rocketData.LoanRequest;
@@ -23,17 +24,16 @@ public class RocketHub extends Hub {
 			resetOutput();
 			
 			LoanRequest lq = (LoanRequest) message;
-			
-			//	TODO - RocketHub.messageReceived
-
-			//	You will have to:
-			//	Determine the rate with the given credit score (call RateBLL.getRate)
-			//		If exception, show error message, stop processing
-			//		If no exception, continue
-			//	Determine if payment, call RateBLL.getPayment
-			//	
-			//	you should update lq, and then send lq back to the caller(s)
-			
+			 double payments = 0;
+			 double loanRate = 0;
+			 try{
+				 payments = RateBLL.getPayment(lq.getiCreditScore(), lq.getiTerm(), lq.getdAmount(), 0, false);
+				 loanRate = RateBLL.getRate(lq.getiCreditScore());
+			 }
+			 catch (RateException e){
+			 }
+			 lq.setdPayment(payments);
+			 lq.setdRate(loanRate);	
 			sendToAll(lq);
 		}
 	}

@@ -1,32 +1,50 @@
 package rocket.app.view;
 
+import java.awt.Button;
+import java.awt.TextField;
+import java.text.DecimalFormat;
+
+import com.sun.xml.ws.org.objectweb.asm.Label;
+
 import eNums.eAction;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import rocket.app.MainApp;
 import rocketCode.Action;
 import rocketData.LoanRequest;
 
 public class MortgageController {
-
-	private MainApp mainApp;
-	
-	//	TODO - RocketClient.RocketMainController
-	
-	//	Create private instance variables for:
-	//		TextBox  - 	txtIncome
-	//		TextBox  - 	txtExpenses
-	//		TextBox  - 	txtCreditScore
-	//		TextBox  - 	txtHouseCost
-	//		ComboBox -	loan term... 15 year or 30 year
-	//		Labels   -  various labels for the controls
-	//		Button   -  button to calculate the loan payment
-	//		Label    -  to show error messages (exception throw, payment exception)
-
+	@FXML
+		TextField txtIncome;
+	@FXML
+		TextField txtExpense;
+	@FXML
+		TextField txtCreditScore;
+	@FXML
+		TextField txtHouseCost;
+	@FXML
+		ComboBox<String> cbLoanTerm;
+	@FXML
+		Label lblPayment;
+	@FXML
+		Button btnMortgagePayment;
+	@FXML
+		Label lblError;
+	@FXML
+		public void initialize(){
+			ObservableList<String> ComboBox = FXCollections.observableArrayList("15 Years","30 Years");
+			cbLoanTerm.setItems(ComboBox);
+	}
+	public MainApp mainApp;
+	public MainApp getMainApp() {
+		return mainApp;
+	}
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-	
 	
 	//	TODO - RocketClient.RocketMainController
 	//			Call this when btnPayment is pressed, calculate the payment
@@ -38,23 +56,35 @@ public class MortgageController {
 		
 		Action a = new Action(eAction.CalculatePayment);
 		LoanRequest lq = new LoanRequest();
-		//	TODO - RocketClient.RocketMainController
-		//			set the loan request details...  rate, term, amount, credit score, downpayment
-		//			I've created you an instance of lq...  execute the setters in lq
-
 		a.setLoanRequest(lq);
 		
-		//	send lq as a message to RocketHub		
+		double Income = Double.parseDouble(txtIncome.getText());
+			lq.setIncome(Income);
+		double Expenses = Double.parseDouble(txtExpense.getText());
+			lq.setExpenses(Expenses);
+		int creditScore = (int)Double.parseDouble(txtCreditScore.getText());
+			lq.setiCreditScore(creditScore);
+		double houseCosts = Double.parseDouble(txtHouseCost.getText());
+			lq.setdAmount(houseCosts);
+		int term = 0;
+			if (cbLoanTerm.getValue()=="15 Years"){
+				term = 15;
+			}
+			else{
+				term = 30;
+			}
 		mainApp.messageSend(lq);
 	}
 	
-	public void HandleLoanRequestDetails(LoanRequest lRequest)
-	{
+	@FXML
+	public void HandleLoanRequestDetails(LoanRequest lRequest) {
+		
+		
 		//	TODO - RocketClient.HandleLoanRequestDetails
 		//			lRequest is an instance of LoanRequest.
 		//			after it's returned back from the server, the payment (dPayment)
 		//			should be calculated.
 		//			Display dPayment on the form, rounded to two decimal places
-		
+		//return mPay;
 	}
 }
