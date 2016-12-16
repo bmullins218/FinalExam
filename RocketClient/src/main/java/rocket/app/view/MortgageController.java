@@ -46,13 +46,11 @@ public class MortgageController {
 		this.mainApp = mainApp;
 	}
 	
-	//	TODO - RocketClient.RocketMainController
-	//			Call this when btnPayment is pressed, calculate the payment
 	@FXML
 	public void btnCalculatePayment(ActionEvent event)
 	{
 		Object message = null;
-		//	TODO - RocketClient.RocketMainController
+
 		
 		Action a = new Action(eAction.CalculatePayment);
 		LoanRequest lq = new LoanRequest();
@@ -79,12 +77,5 @@ public class MortgageController {
 	@FXML
 	public void HandleLoanRequestDetails(LoanRequest lRequest) {
 		
-		
-		//	TODO - RocketClient.HandleLoanRequestDetails
-		//			lRequest is an instance of LoanRequest.
-		//			after it's returned back from the server, the payment (dPayment)
-		//			should be calculated.
-		//			Display dPayment on the form, rounded to two decimal places
-		//return mPay;
 	}
 }
